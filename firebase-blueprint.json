@@ -1,0 +1,120 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "User profile with personal, educational, technical skills, and career preferences.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string", "maxLength": 128 },
+        "fullName": { "type": "string", "maxLength": 150 },
+        "email": { "type": "string", "maxLength": 150 },
+        "college": { "type": "string", "maxLength": 200 },
+        "currentYear": { "type": "string", "maxLength": 50 },
+        "careerGoal": { "type": "string", "maxLength": 150 },
+        "phone": { "type": "string", "maxLength": 30 },
+        "location": { "type": "string", "maxLength": 100 },
+        "linkedin": { "type": "string", "maxLength": 200 },
+        "github": { "type": "string", "maxLength": 200 },
+        "portfolio": { "type": "string", "maxLength": 200 },
+        "degree": { "type": "string", "maxLength": 100 },
+        "branch": { "type": "string", "maxLength": 100 },
+        "graduationYear": { "type": "string", "maxLength": 10 },
+        "cgpa": { "type": "string", "maxLength": 10 },
+        "profileScore": { "type": "number" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["userId", "email"]
+    },
+    "ResumeAnalysis": {
+      "title": "ResumeAnalysis",
+      "description": "Structured AI analysis of an uploaded resume.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string", "maxLength": 128 },
+        "fileName": { "type": "string", "maxLength": 200 },
+        "score": { "type": "number" },
+        "summary": { "type": "string", "maxLength": 2000 },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["userId", "score"]
+    },
+    "SavedJob": {
+      "title": "SavedJob",
+      "description": "Job or internship saved by a student.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string", "maxLength": 128 },
+        "jobId": { "type": "string", "maxLength": 100 },
+        "title": { "type": "string", "maxLength": 150 },
+        "company": { "type": "string", "maxLength": 150 },
+        "location": { "type": "string", "maxLength": 100 },
+        "savedAt": { "type": "string" }
+      },
+      "required": ["userId", "jobId"]
+    },
+    "Application": {
+      "title": "Application",
+      "description": "Tracked job application with status stages.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string", "maxLength": 128 },
+        "jobId": { "type": "string", "maxLength": 100 },
+        "title": { "type": "string", "maxLength": 150 },
+        "company": { "type": "string", "maxLength": 150 },
+        "status": { "type": "string", "enum": ["Saved", "Applied", "Interview", "Selected", "Rejected"] },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["userId", "jobId", "status"]
+    },
+    "SkillAnalysis": {
+      "title": "SkillAnalysis",
+      "description": "Target role skill gap analysis and personalized roadmap.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string", "maxLength": 128 },
+        "targetRole": { "type": "string", "maxLength": 100 },
+        "readinessScore": { "type": "number" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["userId", "targetRole"]
+    },
+    "ChatMessage": {
+      "title": "ChatMessage",
+      "description": "AI career assistant conversation message.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string", "maxLength": 128 },
+        "role": { "type": "string", "enum": ["user", "assistant"] },
+        "content": { "type": "string", "maxLength": 10000 },
+        "timestamp": { "type": "string" }
+      },
+      "required": ["userId", "role", "content"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": { "$ref": "#/entities/UserProfile" },
+      "description": "Stores user profile and account information."
+    },
+    "/resumeAnalyses/{analysisId}": {
+      "schema": { "$ref": "#/entities/ResumeAnalysis" },
+      "description": "Stores AI resume analyses per user."
+    },
+    "/savedJobs/{savedJobId}": {
+      "schema": { "$ref": "#/entities/SavedJob" },
+      "description": "Stores saved job listings for users."
+    },
+    "/applications/{applicationId}": {
+      "schema": { "$ref": "#/entities/Application" },
+      "description": "Stores tracked job applications and statuses."
+    },
+    "/skillAnalyses/{skillAnalysisId}": {
+      "schema": { "$ref": "#/entities/SkillAnalysis" },
+      "description": "Stores skill gap analyses and learning roadmaps."
+    },
+    "/chatMessages/{messageId}": {
+      "schema": { "$ref": "#/entities/ChatMessage" },
+      "description": "Stores conversational turns with the AI Career Assistant."
+    }
+  }
+}

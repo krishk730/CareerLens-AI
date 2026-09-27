@@ -1,0 +1,6 @@
+{
+  "name": "CareerLens AI",
+  "description": "Learn • Showcase Skills • Find Opportunities • Grow. AI-powered career marketplace and career intelligence platform for students and job seekers.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
